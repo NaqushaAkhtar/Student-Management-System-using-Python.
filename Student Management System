@@ -1,0 +1,116 @@
+# Student Management System using Lists and Dictionaries
+
+students = []
+
+while True:
+    print("\n========== Student Management System ==========")
+    print("1. Add Student")
+    print("2. View All Students")
+    print("3. Search Student")
+    print("4. Update Student Information")
+    print("5. Delete Student Record")
+    print("6. Exit")
+
+    choice = input("Enter your choice (1-6): ")
+
+    # Add Student
+    if choice == "1":
+        roll = input("Enter Roll Number: ")
+
+        # Check if roll number already exists
+        exists = False
+        for student in students:
+            if student["Roll No"] == roll:
+                exists = True
+                break
+
+        if exists:
+            print("Student with this Roll Number already exists!")
+        else:
+            name = input("Enter Student Name: ")
+            age = input("Enter Age: ")
+            course = input("Enter Course: ")
+
+            student = {
+                "Roll No": roll,
+                "Name": name,
+                "Age": age,
+                "Course": course
+            }
+
+            students.append(student)
+            print("Student added successfully!")
+
+    # View All Students
+    elif choice == "2":
+        if len(students) == 0:
+            print("No student records found.")
+        else:
+            print("\n----- Student Records -----")
+            for student in students:
+                print("--------------------------")
+                print("Roll No :", student["Roll No"])
+                print("Name    :", student["Name"])
+                print("Age     :", student["Age"])
+                print("Course  :", student["Course"])
+
+    # Search Student
+    elif choice == "3":
+        roll = input("Enter Roll Number to Search: ")
+        found = False
+
+        for student in students:
+            if student["Roll No"] == roll:
+                print("\nStudent Found")
+                print("--------------------------")
+                print("Roll No :", student["Roll No"])
+                print("Name    :", student["Name"])
+                print("Age     :", student["Age"])
+                print("Course  :", student["Course"])
+                found = True
+                break
+
+        if not found:
+            print("Student not found.")
+
+    # Update Student
+    elif choice == "4":
+        roll = input("Enter Roll Number to Update: ")
+        found = False
+
+        for student in students:
+            if student["Roll No"] == roll:
+                student["Name"] = input("Enter New Name: ")
+                student["Age"] = input("Enter New Age: ")
+                student["Course"] = input("Enter New Course: ")
+
+                print("Student record updated successfully!")
+                found = True
+                break
+
+        if not found:
+            print("Student not found.")
+
+    # Delete Student
+    elif choice == "5":
+        roll = input("Enter Roll Number to Delete: ")
+        found = False
+
+        for student in students:
+            if student["Roll No"] == roll:
+                students.remove(student)
+                print("Student record deleted successfully!")
+                found = True
+                break
+
+        if not found:
+            print("Student not found.")
+
+    # Exit
+    elif choice == "6":
+        print("Thank you for using the Student Management System!")
+        break
+
+    # Invalid Choice
+    else:
+        print("Invalid choice! Please enter a number between 1 and 6.")
